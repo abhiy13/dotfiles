@@ -31,6 +31,7 @@ set expandtab
 set title
 set clipboard=unnamedplus
 set nowrap
+set nohlsearch
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -57,6 +58,7 @@ let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_global_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_show_diagnostics_ui = 1
+let g:ycm_min_num_of_chars_for_completion = 3
 
 if has('nvim')
     autocmd TermOpen term://* startinsert
@@ -85,9 +87,13 @@ noremap <c-A> :%y+<CR>
 noremap <c-S> :w<CR>
 noremap <c-T> :tabn<CR>
 noremap <c-N> :tabe<CR>
+noremap <F7> :make all && make test<CR>
 noremap <F8> :terminal g++ -std=c++14 -Wall -O2 %:r.cpp -o %:r<CR>
 autocmd Filetype python noremap <F9> :w \| terminal python3 %<CR>
-autocmd Filetype c,cpp noremap <F9> :w \| terminal g++ -std=c++14 -pedantic -Wall -Wunused -Wuninitialized -Wfloat-equal -Woverflow -Wshadow  -Wextra  -Wconversion -DDEBUG %:r.cpp -o %:r<CR>
+autocmd Filetype c,cpp noremap <F9> :w \| :!gnome-terminal -- bash -c "g++ -std=c++14 -pedantic -Wall -Wunused -Wuninitialized -Wfloat-equal -Woverflow -Wshadow  -Wextra  -Wconversion -DDEBUG %:r.cpp -o %:r ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" <CR><CR>
 noremap <F10> :terminal ./"%<" <CR>
 noremap <c-B> :terminal ./"%<" < in<CR>
 noremap <c-Z> :u<CR>
+
+" to run with gnome-terminal
+"  :!gnome-terminal -- bash -c "command ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" 
