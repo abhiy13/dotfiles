@@ -14,6 +14,8 @@ Plugin 'skywind3000/asyncrun.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plugin 'morhetz/gruvbox'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()  
 filetype plugin indent on
 
@@ -53,6 +55,7 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+let g:airline_powerline_fonts = 1
 " let g:ycm_server_python_interpreter = 'python'
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_global_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -77,6 +80,8 @@ set background=light
 " set undodir=~/.vim/undo-dir
 " set undofile
 
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
 imap <C-d> <C-[>diwi
 noremap <F4> :!<CR>
@@ -88,11 +93,11 @@ noremap <c-S> :w<CR>
 noremap <c-T> :tabn<CR>
 noremap <c-N> :tabe<CR>
 noremap <F7> :make all && make test<CR>
-noremap <F8> :terminal g++ -std=c++14 -Wall -O2 %:r.cpp -o %:r<CR>
-autocmd Filetype python noremap <F9> :w \| terminal python3 %<CR>
+noremap <F8> :!gnome-terminal -- bash -c " g++ -std=c++14 -Wall -O2 %:r.cpp -o %:r ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" <CR><CR>
+autocmd Filetype python noremap <F9> :w \|  :!gnome-terminal -- bash -c "python3 % ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" <CR><CR>
 autocmd Filetype c,cpp noremap <F9> :w \| :!gnome-terminal -- bash -c "g++ -std=c++14 -pedantic -Wall -Wunused -Wuninitialized -Wfloat-equal -Woverflow -Wshadow  -Wextra  -Wconversion -DDEBUG %:r.cpp -o %:r ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" <CR><CR>
-noremap <F10> :terminal ./"%<" <CR>
-noremap <c-B> :terminal ./"%<" < in<CR>
+noremap <F10> :!gnome-terminal -- bash -c "./"%<"  ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" <CR><CR>
+noremap <c-B> :!gnome-terminal -- bash -c "./"%<" < in  ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" <CR><CR>
 noremap <c-Z> :u<CR>
 
 " to run with gnome-terminal
