@@ -1,5 +1,5 @@
 set nocompatible
-filetype off    
+filetype off
 
 set rtp+=/home/abhiy13/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/
@@ -16,7 +16,7 @@ Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-call vundle#end()  
+call vundle#end()
 filetype plugin indent on
 
 set laststatus=2
@@ -29,7 +29,7 @@ set autoread
 syntax on
 set number
 set softtabstop=0
-set expandtab 
+set expandtab
 set title
 set clipboard=unnamedplus
 set nowrap
@@ -56,6 +56,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
 " let g:ycm_server_python_interpreter = 'python'
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_global_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -65,7 +67,7 @@ let g:ycm_min_num_of_chars_for_completion = 3
 
 if has('nvim')
     autocmd TermOpen term://* startinsert
-    autocmd TermOpen * set bufhidden=hide 
+    autocmd TermOpen * set bufhidden=hide
 endif
 colorscheme solarized8_high
 set background=light
@@ -101,4 +103,4 @@ noremap <c-B> :!gnome-terminal -- bash -c "./"%<" < in  ; echo;echo;  echo Press
 noremap <c-Z> :u<CR>
 
 " to run with gnome-terminal
-"  :!gnome-terminal -- bash -c "command ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash" 
+"  :!gnome-terminal -- bash -c "command ; echo;echo;  echo Press ENTER to continue; read line;exit; exec bash"
