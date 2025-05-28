@@ -168,6 +168,7 @@ install_essentials() {
     install_package "vim" "vim" "vim" "vim"
     install_package "neovim" "neovim" "neovim" "neovim"
     install_package "zsh" "zsh" "zsh" "zsh"
+    install_package "neofetch" "neofetch" "neofetch" "neofetch"
 }
 
 # Install Node.js
@@ -333,9 +334,31 @@ setup_shell() {
 
 # Install Neovim plugins
 setup_neovim() {
+    log_info "Setting up Neovim with NvChad..."
+    
+    # Backup existing Neovim configuration if it exists and isn't our config
+    if [ -d "$HOME/.config/nvim" ] && [ ! -L "$HOME/.config/nvim" ]; then
+        log_info "Backing up existing Neovim config to ~/.config/nvim.backup"
+        mv "$HOME/.config/nvim" "$HOME/.config/nvim.backup"
+    fi
+    
+    # Remove existing Neovim data to ensure clean install
+    if [ -d "$HOME/.local/share/nvim" ]; then
+        log_info "Cleaning existing Neovim data for fresh NvChad install"
+        rm -rf "$HOME/.local/share/nvim"
+    fi
+    
+    # Install NvChad if our config exists
     if [ -f "$HOME/.config/nvim/init.lua" ]; then
-        log_step "Installing Neovim plugins..."
-        nvim --headless "+Lazy! sync" +qa 2>/dev/null || log_warning "Neovim plugins installation may have issues, please run :Lazy sync manually in nvim"
+        log_step "Installing NvChad and plugins..."
+        nvim --headless "+Lazy! sync" +qa 2>/dev/null || log_warning "NvChad installation may have issues, please run :Lazy sync manually in nvim"
+        
+        log_step "Installing LSP servers and tools with Mason..."
+        nvim --headless "+MasonInstallAll" +qa 2>/dev/null || log_warning "Mason installation may have issues, please run :MasonInstallAll manually in nvim"
+        
+        log_success "NvChad setup complete"
+    else
+        log_warning "Neovim config not found, skipping NvChad installation"
     fi
 }
 

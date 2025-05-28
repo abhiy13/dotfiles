@@ -133,3 +133,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(starship init zsh)"
 
+neofetch

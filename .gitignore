@@ -1,2 +1,4 @@
 .config/alacritty/themes
 .config/nvim/pack
+.config/nvim/lazy-lock.json
+.config/nvim/LICENSE
